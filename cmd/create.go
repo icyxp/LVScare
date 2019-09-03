@@ -17,7 +17,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/fanux/LVScare/create"
+	"github.com/icyxp/LVScare/create"
 	"github.com/spf13/cobra"
 )
 

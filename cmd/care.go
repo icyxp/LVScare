@@ -15,7 +15,7 @@
 package cmd
 
 import (
-	"github.com/fanux/LVScare/care"
+	"github.com/icyxp/LVScare/care"
 	"github.com/spf13/cobra"
 )
 
