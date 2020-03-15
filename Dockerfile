@@ -1,15 +1,16 @@
-FROM golang:1.12-alpine3.10 as go_builder
-
-RUN apk add --no-cache git
-
-ENV CGO_ENABLED=0
-ENV GO111MODULE=on
-ENV GOPROXY=https://goproxy.cn
-
-COPY . /usr/local/go/src/github/LVScare
+FROM golang:1.13.8-alpine3.10 as go_builder
 
 RUN \
-    cd /usr/local/go/src/github/LVScare && \
+    sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
+    apk add --no-cache git
+
+ENV CGO_ENABLED=0
+ENV GOPROXY=https://goproxy.cn
+
+COPY . /go/src/github/LVScare
+
+RUN \
+    cd /go/src/github/LVScare && \
     go install -a -v -ldflags="-w -s" ./ 
 
 # final image
