@@ -1,4 +1,7 @@
 [![Build Status](https://cloud.drone.io/api/badges/icyxp/LVScare/status.svg)](https://cloud.drone.io/icyxp/LVScare)
+[![](https://images.microbadger.com/badges/image/icyboy/lvscare.svg)](https://microbadger.com/images/icyboy/lvscare "Get your own image badge on microbadger.com")
+[![Go Doc](https://godoc.org/github.com/icyxp/lvscare?status.svg)](http://godoc.org/github.com/icyxp/lvscare)
+[![Go Report](https://goreportcard.com/badge/github.com/icyxp/lvscare)](https://goreportcard.com/report/github.com/icyxp/lvscare)
 
 # LVScare
 A lightweight LVS baby care, support ipvs health check
