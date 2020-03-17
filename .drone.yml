@@ -1,38 +1,38 @@
 kind: pipeline
 name: default
 workspace:
-    base: /go
-    path: src/github.com/icyxp/LVScare
+  base: /go
+  path: src/github.com/icyxp/LVScare
 
 # go mod vender
-#environment: 
+#environment:
 #    GO111MODULE: on
 
 steps:
-- name: build
-  image: golang:1.11.3
-  commands:
+  - name: build
+    image: golang:1.13.8
+    commands:
       - go build -o lvscare
 
-- name: publish-hub
-  image: plugins/docker
-  settings:
-    repo: fanux/lvscare
-    tags: ${DRONE_TAG=latest}
-    username:
-      from_secret: docker-hub-user
-    dockerfile: Dockerfile
-    password:
-      from_secret: docker-hub-pass
+  - name: publish-hub
+    image: plugins/docker
+    settings:
+      repo: icyboy/lvscare
+      tags: ${DRONE_TAG=latest}
+      username:
+        from_secret: docker-hub-user
+      dockerfile: Dockerfile
+      password:
+        from_secret: docker-hub-pass
 
-- name: publish
-  image: plugins/github-release
-  settings:
-    api_key: 
+  - name: publish
+    image: plugins/github-release
+    settings:
+      api_key:
         from_secret: git-release-token
-    files: lvscare
-    title: ${DRONE_TAG}
-    note: Note.md
+      files: lvscare
+      title: ${DRONE_TAG}
+      note: Note.md
     when:
-        event: tag
-
+      event:
+        - tag
