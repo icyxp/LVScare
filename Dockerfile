@@ -1,8 +1,6 @@
 FROM golang:1.13.8-alpine3.10 as go_builder
 
-RUN \
-    sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
-    apk add --no-cache git
+RUN apk add --no-cache git
 
 ENV CGO_ENABLED=0
 ENV GOPROXY=https://goproxy.cn
