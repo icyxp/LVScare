@@ -16,6 +16,6 @@ RUN \
 # final image
 FROM icyboy/centos:7-mini
 
-COPY --from=go_builder /go/bin/LVScare /usr/local/bin/lvscare
+COPY --from=go_builder /go/bin/LVScare /usr/bin/lvscare
 
 CMD ["lvscare"]
