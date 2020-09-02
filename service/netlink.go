@@ -18,6 +18,8 @@ import (
 	"github.com/vishvananda/netns"
 )
 
+const PidKernel uint32 = 0
+
 // For Quick Reference IPVS related netlink message is described at the end of this file.
 var (
 	native     = nl.NativeEndian()
@@ -215,7 +217,7 @@ func execute(s *nl.NetlinkSocket, req *nl.NetlinkRequest, resType uint16) ([][]b
 
 done:
 	for {
-		msgs, err := s.Receive()
+		msgs, from, err := s.Receive()
 		if err != nil {
 			if s.GetFd() == -1 {
 				return nil, fmt.Errorf("Socket got closed on receive")
@@ -225,6 +227,10 @@ done:
 				continue
 			}
 			return nil, err
+		}
+
+		if from.Pid != PidKernel {
+			return nil, fmt.Errorf("Wrong sender portid %d, expected %d", from.Pid, PidKernel)
 		}
 
 		for _, m := range msgs {
